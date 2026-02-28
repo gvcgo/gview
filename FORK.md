@@ -1,7 +1,7 @@
 This document explains why [tview](https://github.com/rivo/tview) was forked to
-create [cview](https://codeberg.org/tslocum/cview). It also explains any
+create [gview](https://github.com/gvcgo/gview). It also explains any
 differences between the projects and tracks which tview pull requests have been
-merged into cview.
+merged into gview.
 
 # Why fork?
 
@@ -21,7 +21,7 @@ discuss and merge pull requests:
 >behind it, understand it 100%, and be able to make changes to it later if
 > necessary.
 
-cview aims to solve these issues by increasing the number of project
+gview aims to solve these issues by increasing the number of project
 maintainers and allowing code changes which may be outside of tview's scope.
 
 # Differences
@@ -33,11 +33,11 @@ might accidentally end the chain with a different return type than the first
 method call. This could result in unexpected return types. For example, ending
 a chain with `SetTitle` would result in a `Box` rather than the original primitive.
 
-## cview is [thread-safe](https://docs.rocket9labs.com/codeberg.org/tslocum/cview/#hdr-Concurrency)
+## gview is thread-safe
 
 tview [is not thread-safe](https://godoc.org/github.com/rivo/tview#hdr-Concurrency).
 
-## [Application.QueueUpdate](https://docs.rocket9labs.com/codeberg.org/tslocum/cview/#Application.QueueUpdate) and [Application.QueueUpdateDraw](https://docs.rocket9labs.com/codeberg.org/tslocum/cview/#Application.QueueUpdateDraw) do not block
+## `Application.QueueUpdate` and `Application.QueueUpdateDraw` do not block
 
 tview [blocks until the queued function returns](https://github.com/rivo/tview/blob/fe3052019536251fd145835dbaa225b33b7d3088/application.go#L510).
 
@@ -58,16 +58,16 @@ func (w *Widget) Draw(screen tcell.Screen) {
 
 ## Setting a primitive's background color to `tcell.ColorDefault` does not result in transparency
 
-Call [Box.SetBackgroundTransparent](https://docs.rocket9labs.com/codeberg.org/tslocum/cview/#Box.SetBackgroundTransparent)
+to enable background transparency.
 to enable background transparency.
 
 ## Double clicks are not handled by default
 
-All clicks are handled as single clicks until an interval is set with [Application.SetDoubleClickInterval](https://docs.rocket9labs.com/codeberg.org/tslocum/cview/#Application.SetDoubleClickInterval).
+All clicks are handled as single clicks until an interval is set with `Application.SetDoubleClickInterval`.
 
 ## Tables are sorted when a fixed row is clicked by default
 
-Call [Table.SetSortClicked](https://docs.rocket9labs.com/codeberg.org/tslocum/cview/#Table.SetSortClicked)
+to disable this behavior.
 to disable this behavior.
 
 ## Lists and Forms do not wrap around by default
@@ -81,8 +81,8 @@ remaining unchanged.
 
 ## TextViews store their text as []byte instead of string
 
-This greatly improves buffer efficiency. [TextView.Write](https://docs.rocket9labs.com/codeberg.org/tslocum/cview/#TextView.Write)
-is 90% faster and [TextView.Draw](https://docs.rocket9labs.com/codeberg.org/tslocum/cview/#TextView.Draw)
+This greatly improves buffer efficiency. `TextView.Write`
+is 90% faster and `TextView.Draw`
 is 50% faster.
 
 ## `Pages` has been renamed as `Panels`
@@ -98,16 +98,16 @@ tview moves the updated panel to the end.
 When calling `Application.Draw` without providing any primitives, the entire
 screen is drawn. This behavior matches tview.
 
-When using cview, you may provide one or more primitives to limit drawing.
+When using gview, you may provide one or more primitives to limit drawing.
 
 ## `Application.ForceDraw` has been removed
 
-Because cview is [thread-safe](https://docs.rocket9labs.com/codeberg.org/tslocum/cview/#hdr-Concurrency),
+Because gview is thread-safe,
 application draws must be queued. Call `Application.QueueUpdateDraw` to queue
 an update that requires the application to be drawn when completed.
 
 ## cview imports tcell/v3
-
+## gview imports tcell/v3
 tview imports tcell/v2.
 
 # Merged pull requests

@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"codeberg.org/tslocum/cview"
+	"github.com/gvcgo/gview"
 	"github.com/gdamore/tcell/v3"
 )
 

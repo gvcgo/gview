@@ -22,7 +22,7 @@ import (
 	_ "net/http/pprof"
 	"strconv"
 
-	"codeberg.org/tslocum/cview"
+	"github.com/gvcgo/gview"
 	"github.com/gdamore/tcell/v3"
 )
 

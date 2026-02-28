@@ -1,6 +1,6 @@
 package main
 
-import "codeberg.org/tslocum/cview"
+import "github.com/gvcgo/gview"
 
 // Introduction returns a cview.List with the highlights of the cview package.
 func Introduction(nextSlide func()) (title string, info string, content cview.Primitive) {

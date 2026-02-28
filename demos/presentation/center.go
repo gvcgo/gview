@@ -1,6 +1,6 @@
 package main
 
-import "codeberg.org/tslocum/cview"
+import "github.com/gvcgo/gview"
 
 // Center returns a new primitive which shows the provided primitive in its
 // center, given the provided primitive's size.

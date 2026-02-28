@@ -1,4 +1,4 @@
-module codeberg.org/tslocum/cview
+module github.com/gvcgo/gview
 
 go 1.24.0
 

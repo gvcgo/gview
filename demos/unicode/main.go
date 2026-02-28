@@ -4,7 +4,7 @@ package main
 import (
 	"fmt"
 
-	"codeberg.org/tslocum/cview"
+	"github.com/gvcgo/gview"
 )
 
 func main() {

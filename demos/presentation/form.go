@@ -1,7 +1,7 @@
 package main
 
 import (
-	"codeberg.org/tslocum/cview"
+	"github.com/gvcgo/gview"
 )
 
 // Form demonstrates forms.

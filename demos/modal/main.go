@@ -2,7 +2,7 @@
 package main
 
 import (
-	"codeberg.org/tslocum/cview"
+	"github.com/gvcgo/gview"
 )
 
 func main() {

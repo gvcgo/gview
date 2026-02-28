@@ -4,7 +4,7 @@ package main
 import (
 	"strings"
 
-	"codeberg.org/tslocum/cview"
+	"github.com/gvcgo/gview"
 	"github.com/gdamore/tcell/v3"
 )
 

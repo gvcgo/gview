@@ -1,15 +1,15 @@
-# cview - Terminal-based user interface toolkit
-[![GoDoc](https://codeberg.org/tslocum/godoc-static/raw/branch/main/badge.svg)](https://docs.rocket9labs.com/codeberg.org/tslocum/cview)
+# gview - Terminal-based user interface toolkit
+[![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://pkg.go.dev/github.com/gvcgo/gview)
 [![Donate](https://img.shields.io/liberapay/receives/rocket9labs.com.svg?logo=liberapay)](https://liberapay.com/rocket9labs.com)
 
 This package is a fork of [tview](https://github.com/rivo/tview).
-See [FORK.md](https://codeberg.org/tslocum/cview/src/branch/master/FORK.md) for more information.
+See [FORK.md](FORK.md) for more information.
 
 ## Demo
 
 `ssh cview.rocket9labs.com -p 20000`
 
-[![Screenshot of presentation demo](https://codeberg.org/tslocum/cview/raw/branch/master/screenshot.png)](https://codeberg.org/tslocum/cview/src/branch/master/demos/presentation)
+[![Screenshot of presentation demo](screenshot.png)](demos/presentation)
 
 ## Features
 
@@ -28,16 +28,16 @@ Available widgets:
 
 Widgets may be customized and extended to suit any application.
 
-[Mouse support](https://docs.rocket9labs.com/codeberg.org/tslocum/cview#hdr-Mouse_Support) is available.
+[Mouse support](https://pkg.go.dev/github.com/gvcgo/gview#hdr-Mouse_Support) is available.
 
 ## Applications
 
-A list of applications powered by cview is available via [pkg.go.dev](https://pkg.go.dev/codeberg.org/tslocum/cview?tab=importedby).
+A list of applications powered by gview is available via [pkg.go.dev](https://pkg.go.dev/github.com/gvcgo/gview?tab=importedby).
 
 ## Installation
 
 ```bash
-go get codeberg.org/tslocum/cview
+go get github.com/gvcgo/gview
 ```
 
 ## Hello World
@@ -48,7 +48,7 @@ This basic example creates a TextView titled "Hello, World!" and displays it in 
 package main
 
 import (
-	"codeberg.org/tslocum/cview"
+	"github.com/gvcgo/gview"
 )
 
 func main() {
@@ -66,15 +66,15 @@ func main() {
 }
 ```
 
-Examples are available via [godoc](https://docs.rocket9labs.com/codeberg.org/tslocum/cview#pkg-examples)
-and in the [demos](https://codeberg.org/tslocum/cview/src/branch/master/demos) directory.
+Examples are available via [godoc](https://pkg.go.dev/github.com/gvcgo/gview#pkg-examples)
+and in the [demos](demos) directory.
 
 For a presentation highlighting the features of this package, compile and run
-the program in the [demos/presentation](https://codeberg.org/tslocum/cview/src/branch/master/demos/presentation) directory.
+the program in the [demos/presentation](demos/presentation) directory.
 
 ## Documentation
 
-Package documentation is available via [godoc](https://docs.rocket9labs.com/codeberg.org/tslocum/cview).
+Package documentation is available via [godoc](https://pkg.go.dev/github.com/gvcgo/gview).
 
 An [introduction tutorial](https://rocket9labs.com/post/tview-and-you/) is also available.
 
@@ -85,5 +85,5 @@ This package is based on [github.com/gdamore/tcell](https://github.com/gdamore/t
 
 ## Support
 
-[CONTRIBUTING.md](https://codeberg.org/tslocum/cview/src/branch/master/CONTRIBUTING.md) describes how to share
+[CONTRIBUTING.md](CONTRIBUTING.md) describes how to share
 issues, suggestions and patches (pull requests).

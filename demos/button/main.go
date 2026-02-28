@@ -1,7 +1,7 @@
 // Demo code for the Button primitive.
 package main
 
-import "codeberg.org/tslocum/cview"
+import "github.com/gvcgo/gview"
 
 func main() {
 	app := cview.NewApplication()
