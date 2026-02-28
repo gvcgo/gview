@@ -239,10 +239,7 @@ func (s *Slider) Draw(screen tcell.Screen) {
 			// TODO draw label on bottom
 		} else {
 			if s.labelWidth > 0 {
-				labelWidth := s.labelWidth
-				if labelWidth > rightLimit-x {
-					labelWidth = rightLimit - x
-				}
+				labelWidth := min(s.labelWidth, rightLimit-x)
 				Print(screen, []byte(s.label), x, y, labelWidth, AlignLeft, labelColor)
 				x += labelWidth + 1
 				width -= labelWidth + 1

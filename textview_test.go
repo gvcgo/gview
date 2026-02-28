@@ -36,7 +36,6 @@ func TestTextViewWrite(t *testing.T) {
 	t.Parallel()
 
 	for _, c := range textViewTestCases {
-		c := c // Capture
 
 		t.Run(c.String(), func(t *testing.T) {
 			t.Parallel()
@@ -80,7 +79,6 @@ func TestTextViewWrite(t *testing.T) {
 
 func BenchmarkTextViewWrite(b *testing.B) {
 	for _, c := range textViewTestCases {
-		c := c // Capture
 
 		b.Run(c.String(), func(b *testing.B) {
 			var (
@@ -119,7 +117,6 @@ func BenchmarkTextViewWrite(b *testing.B) {
 
 func BenchmarkTextViewIndex(b *testing.B) {
 	for _, c := range textViewTestCases {
-		c := c // Capture
 
 		b.Run(c.String(), func(b *testing.B) {
 			var (
@@ -187,7 +184,6 @@ func TestTextViewGetText(t *testing.T) {
 
 func BenchmarkTextViewGetText(b *testing.B) {
 	for _, c := range textViewTestCases {
-		c := c // Capture
 
 		if c.app {
 			continue // Skip for this benchmark
@@ -293,7 +289,7 @@ var textViewRegionsTestCases = []textViewRegionsTestCase{
 func TestTextViewANSI(t *testing.T) {
 	t.Parallel()
 
-	for j := 0; j < 2; j++ {
+	for j := range 2 {
 		for i, c := range textViewRegionsTestCases {
 			label := "Normal"
 			expectedResult := c.normal
@@ -326,8 +322,8 @@ func TestTextViewANSI(t *testing.T) {
 
 				tv.Draw(app.screen)
 				var expected textViewResult
-				for y := 0; y < screenH; y++ {
-					for x := 0; x < screenW; x++ {
+				for y := range screenH {
+					for x := range screenW {
 						expected = textViewResult{
 							str:   " ",
 							width: 1,
@@ -357,7 +353,6 @@ func TestTextViewDraw(t *testing.T) {
 	t.Parallel()
 
 	for _, c := range textViewTestCases {
-		c := c // Capture
 
 		t.Run(c.String(), func(t *testing.T) {
 			t.Parallel()
@@ -392,7 +387,6 @@ func TestTextViewDraw(t *testing.T) {
 
 func BenchmarkTextViewDraw(b *testing.B) {
 	for _, c := range textViewTestCases {
-		c := c // Capture
 
 		b.Run(c.String(), func(b *testing.B) {
 			tv := tvc(c)
@@ -436,8 +430,8 @@ func TestTextViewMaxLines(t *testing.T) {
 	tv := NewTextView()
 
 	// append 100 lines with no limit set:
-	for i := 0; i < 100; i++ {
-		_, err := tv.Write([]byte(fmt.Sprintf("L%d\n", i)))
+	for i := range 100 {
+		_, err := tv.Write(fmt.Appendf(nil, "L%d\n", i))
 		if err != nil {
 			t.Errorf("failed to write to TextView: %s", err)
 		}
@@ -459,7 +453,7 @@ func TestTextViewMaxLines(t *testing.T) {
 
 	// append 100 more lines:
 	for i := 100; i < 200; i++ {
-		_, err := tv.Write([]byte(fmt.Sprintf("L%d\n", i)))
+		_, err := tv.Write(fmt.Appendf(nil, "L%d\n", i))
 		if err != nil {
 			t.Errorf("failed to write to TextView: %s", err)
 		}
@@ -481,17 +475,17 @@ func TestTextViewMaxLines(t *testing.T) {
 
 func generateTestCases() []*textViewTestCase {
 	var cases []*textViewTestCase
-	for i := 0; i < 2; i++ {
+	for i := range 2 {
 		app := i == 1
-		for i := 0; i < 2; i++ {
+		for i := range 2 {
 			color := i == 1
-			for i := 0; i < 2; i++ {
+			for i := range 2 {
 				region := i == 1
-				for i := 0; i < 2; i++ {
+				for i := range 2 {
 					scroll := i == 1
-					for i := 0; i < 2; i++ {
+					for i := range 2 {
 						wrap := i == 1
-						for i := 0; i < 2; i++ {
+						for i := range 2 {
 							wordwrap := i == 1
 							if !wrap && wordwrap {
 								continue // WordWrap requires Wrap
@@ -512,7 +506,7 @@ func generateRandomData() []byte {
 		r = 33
 	)
 
-	for i := 0; i < randomDataSize; i++ {
+	for i := range randomDataSize {
 		if i%80 == 0 && i <= 160 {
 			b.WriteRune('\n')
 		} else if i%7 == 0 {
@@ -549,7 +543,7 @@ func cl(v bool) rune {
 
 func prepareAppendTextView(t *TextView) ([]byte, error) {
 	var b []byte
-	for i := 0; i < appendSetupWriteCount; i++ {
+	for range appendSetupWriteCount {
 		b = append(b, randomData...)
 
 		n, err := t.Write(randomData)

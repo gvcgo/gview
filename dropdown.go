@@ -12,7 +12,7 @@ import (
 type DropDownOption struct {
 	text      string                                  // The text to be displayed in the drop-down.
 	selected  func(index int, option *DropDownOption) // The (optional) callback for when this option was selected.
-	reference interface{}                             // An optional reference object.
+	reference any                                     // An optional reference object.
 
 	sync.RWMutex
 }
@@ -41,7 +41,7 @@ func (d *DropDownOption) SetSelectedFunc(handler func(index int, option *DropDow
 }
 
 // GetReference returns the reference object of this dropdown option.
-func (d *DropDownOption) GetReference() interface{} {
+func (d *DropDownOption) GetReference() any {
 	d.RLock()
 	defer d.RUnlock()
 
@@ -49,7 +49,7 @@ func (d *DropDownOption) GetReference() interface{} {
 }
 
 // SetReference allows you to store a reference of any type in this option.
-func (d *DropDownOption) SetReference(reference interface{}) {
+func (d *DropDownOption) SetReference(reference any) {
 	d.reference = reference
 }
 
@@ -567,10 +567,7 @@ func (d *DropDown) Draw(screen tcell.Screen) {
 
 	// Draw label.
 	if d.labelWidth > 0 {
-		labelWidth := d.labelWidth
-		if labelWidth > rightLimit-x {
-			labelWidth = rightLimit - x
-		}
+		labelWidth := min(d.labelWidth, rightLimit-x)
 		Print(screen, []byte(d.label), x, y, labelWidth, AlignLeft, labelColor)
 		x += labelWidth
 	} else {
@@ -655,10 +652,7 @@ func (d *DropDown) Draw(screen tcell.Screen) {
 		lheight := len(d.options)
 		_, sheight := screen.Size()
 		if ly+lheight >= sheight && ly-2 > lheight-ly {
-			ly = y - lheight
-			if ly < 0 {
-				ly = 0
-			}
+			ly = max(y-lheight, 0)
 		}
 		if ly+lheight >= sheight {
 			lheight = sheight - ly

@@ -22,7 +22,6 @@ func TestTable(t *testing.T) {
 	t.Parallel()
 
 	for _, c := range tableTestCases {
-		c := c // Capture
 
 		t.Run(c.String(), func(t *testing.T) {
 			t.Parallel()
@@ -53,7 +52,6 @@ func TestTable(t *testing.T) {
 
 func BenchmarkTableDraw(b *testing.B) {
 	for _, c := range tableTestCases {
-		c := c // Capture
 
 		b.Run(c.String(), func(b *testing.B) {
 			table := tc(c)
@@ -81,8 +79,8 @@ func generateTableTestCases() []*tableTestCase {
 		rows := i * 5
 		for i := 1; i < 3; i++ {
 			columns := i * 7
-			for fixedRows := 0; fixedRows < 3; fixedRows++ {
-				for fixedColumns := 0; fixedColumns < 3; fixedColumns++ {
+			for fixedRows := range 3 {
+				for fixedColumns := range 3 {
 					cases = append(cases, &tableTestCase{rows, columns, fixedRows, fixedColumns})
 				}
 			}

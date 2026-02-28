@@ -4,7 +4,7 @@ package main
 import (
 	"log"
 
-	"codeberg.org/tslocum/cbind"
+	"github.com/gvcgo/gbind"
 	"github.com/gvcgo/gview"
 	"github.com/gdamore/tcell/v3"
 )
@@ -46,7 +46,7 @@ func main() {
 	focusManager.SetWrapAround(true)
 	focusManager.Add(input1, input2, input3, input4)
 
-	inputHandler := cbind.NewConfiguration()
+	inputHandler := gbind.NewConfiguration()
 	for _, key := range cview.Keys.MovePreviousField {
 		err := inputHandler.Set(key, wrap(focusManager.FocusPrevious))
 		if err != nil {

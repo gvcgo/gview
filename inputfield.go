@@ -571,10 +571,7 @@ func (i *InputField) Draw(screen tcell.Screen) {
 
 	// Draw label.
 	if i.labelWidth > 0 {
-		labelWidth := i.labelWidth
-		if labelWidth > rightLimit-x {
-			labelWidth = rightLimit - x
-		}
+		labelWidth := min(i.labelWidth, rightLimit-x)
 		Print(screen, i.label, x, y, labelWidth, AlignLeft, labelColor)
 		x += labelWidth
 	} else {
@@ -686,10 +683,7 @@ func (i *InputField) Draw(screen tcell.Screen) {
 		ly := y + 1
 		_, sheight := screen.Size()
 		if ly+lheight >= sheight && ly-2 > lheight-ly {
-			ly = y - lheight
-			if ly < 0 {
-				ly = 0
-			}
+			ly = max(y-lheight, 0)
 		}
 		if ly+lheight >= sheight {
 			lheight = sheight - ly

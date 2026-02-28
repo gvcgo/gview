@@ -1,5 +1,3 @@
-codeberg.org/tslocum/cbind v0.1.8 h1:6NA91gq0Ae6ipv4kguCYG2F5sNA6JqbU0iJ+DLVyAkA=
-codeberg.org/tslocum/cbind v0.1.8/go.mod h1:A6hjqRDPZa6DJesTigEXBVYBNQs7MOX5edv/bZMPNhw=
 github.com/clipperhouse/stringish v0.1.1 h1:+NSqMOr3GR6k1FdRhhnXrLfztGzuG+VuFDfatpWHKCs=
 github.com/clipperhouse/stringish v0.1.1/go.mod h1:v/WhFtE1q0ovMta2+m+UbpZ+2/HEXNWYXQgCt4hdOzA=
 github.com/clipperhouse/uax29/v2 v2.4.0 h1:RXqE/l5EiAbA4u97giimKNlmpvkmz+GrBVTelsoXy9g=
@@ -8,6 +6,8 @@ github.com/gdamore/encoding v1.0.1 h1:YzKZckdBL6jVt2Gc+5p82qhrGiqMdG/eNs6Wy0u3Uh
 github.com/gdamore/encoding v1.0.1/go.mod h1:0Z0cMFinngz9kS1QfMjCP8TY7em3bZYeeklsSDPivEo=
 github.com/gdamore/tcell/v3 v3.1.2 h1:qEaXnDaYZpCIMDfa3XFHkxrwFBINUuDiePwj39vErZ8=
 github.com/gdamore/tcell/v3 v3.1.2/go.mod h1:MikpZpivMtggrw1kL999dI2VuXw6Wya4724VAh3DzIg=
+github.com/gvcgo/gbind v0.0.0-20260228060227-cba10c9be078 h1:KLFRK1m0BsUYHSlog44mSMd8do57lA82hBEV7zufE2Q=
+github.com/gvcgo/gbind v0.0.0-20260228060227-cba10c9be078/go.mod h1:rmVRwIgP6iiCvCRQH1s/hsVCKKMwXbDNtcUMlC7vh24=
 github.com/lucasb-eyer/go-colorful v1.3.0 h1:2/yBRLdWBZKrf7gB40FoiKfAWYQ0lqNcbuQwVHXptag=
 github.com/lucasb-eyer/go-colorful v1.3.0/go.mod h1:R4dSotOR9KMtayYi1e77YzuveK+i7ruzyGqttikkLy0=
 github.com/mattn/go-runewidth v0.0.19 h1:v++JhqYnZuu5jSKrk9RbgF5v4CGUjqRfBm05byFGLdw=

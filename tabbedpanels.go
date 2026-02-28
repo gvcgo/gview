@@ -3,6 +3,7 @@ package cview
 import (
 	"bytes"
 	"fmt"
+	"slices"
 	"sync"
 
 	"github.com/gdamore/tcell/v3"
@@ -124,11 +125,8 @@ func (t *TabbedPanels) SetCurrentTab(name string) {
 
 	h := t.Switcher.GetHighlights()
 	var found bool
-	for _, hl := range h {
-		if hl == name {
-			found = true
-			break
-		}
+	if slices.Contains(h, name) {
+		found = true
 	}
 	if !found {
 		t.Switcher.Highlight(t.currentTab)
@@ -300,10 +298,7 @@ func (t *TabbedPanels) updateTabLabels() {
 		if t.switcherHeight > 0 {
 			reqLines = t.switcherHeight
 		} else {
-			reqLines = len(WordWrap(t.Switcher.GetText(true), t.width))
-			if reqLines < 1 {
-				reqLines = 1
-			}
+			reqLines = max(len(WordWrap(t.Switcher.GetText(true), t.width)), 1)
 		}
 	}
 	t.Flex.ResizeItem(t.Switcher, reqLines, 1)

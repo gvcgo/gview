@@ -851,7 +851,7 @@ func (f *Form) Draw(screen tcell.Screen) {
 func (f *Form) updateFocusedElement(decreasing bool) {
 	li := len(f.items)
 	l := len(f.items) + len(f.buttons)
-	for i := 0; i < l; i++ {
+	for range l {
 		if f.focusedElement < 0 {
 			if f.wrapAround {
 				f.focusedElement = l - 1

@@ -1075,7 +1075,7 @@ func (t *TextView) Draw(screen tcell.Screen) {
 			cursor = height
 		}
 
-		for printed := 0; printed < height; printed++ {
+		for printed := range height {
 			RenderScrollBar(screen, t.scrollBarVisibility, x+width, y+printed, height, items, cursor, printed, t.hasFocus, t.scrollBarColor)
 		}
 	}()

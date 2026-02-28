@@ -70,7 +70,7 @@ EventKeys. It also translates between EventKeys and human-readable strings such
 as "Alt+Enter". This makes it possible to store keybindings in a configuration
 file.
 
-cbind: https://codeberg.org/tslocum/cbind
+cbind: https://github.com/gvcgo/gbind
 
 # Bracketed Paste Mode
 

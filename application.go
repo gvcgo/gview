@@ -357,7 +357,7 @@ func (a *Application) Run() error {
 		}
 	}()
 
-	handle := func(event interface{}) {
+	handle := func(event any) {
 		a.RLock()
 		p := a.focus
 		inputCapture := a.inputCapture

@@ -14,7 +14,7 @@ import (
 // which is black.
 type TableCell struct {
 	// The reference object.
-	Reference interface{}
+	Reference any
 
 	// The text to be displayed in the table cell.
 	Text []byte
@@ -178,7 +178,7 @@ func (c *TableCell) SetSelectable(selectable bool) {
 // SetReference allows you to store a reference of any type in this cell. This
 // will allow you to establish a mapping between the cell and your
 // actual data.
-func (c *TableCell) SetReference(reference interface{}) {
+func (c *TableCell) SetReference(reference any) {
 	c.Lock()
 	defer c.Unlock()
 
@@ -186,7 +186,7 @@ func (c *TableCell) SetReference(reference interface{}) {
 }
 
 // GetReference returns this cell's reference object.
-func (c *TableCell) GetReference() interface{} {
+func (c *TableCell) GetReference() any {
 	c.RLock()
 	defer c.RUnlock()
 
@@ -1351,10 +1351,7 @@ func (t *Table) InputHandler() func(event *tcell.EventKey, setFocus func(p Primi
 			}
 
 			pageDown = func() {
-				offsetAmount := t.visibleRows - t.fixedRows
-				if offsetAmount < 0 {
-					offsetAmount = 0
-				}
+				offsetAmount := max(t.visibleRows-t.fixedRows, 0)
 
 				if t.rowsSelectable {
 					t.selectedRow += offsetAmount
@@ -1367,10 +1364,7 @@ func (t *Table) InputHandler() func(event *tcell.EventKey, setFocus func(p Primi
 			}
 
 			pageUp = func() {
-				offsetAmount := t.visibleRows - t.fixedRows
-				if offsetAmount < 0 {
-					offsetAmount = 0
-				}
+				offsetAmount := max(t.visibleRows-t.fixedRows, 0)
 
 				if t.rowsSelectable {
 					t.selectedRow -= offsetAmount

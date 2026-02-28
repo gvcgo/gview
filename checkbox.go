@@ -287,10 +287,7 @@ func (c *CheckBox) Draw(screen tcell.Screen) {
 
 	// Draw label.
 	if c.labelWidth > 0 {
-		labelWidth := c.labelWidth
-		if labelWidth > rightLimit-x {
-			labelWidth = rightLimit - x
-		}
+		labelWidth := min(c.labelWidth, rightLimit-x)
 		Print(screen, c.label, x, y, labelWidth, AlignLeft, labelColor)
 		x += labelWidth
 	} else {

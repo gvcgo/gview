@@ -20,7 +20,7 @@ const (
 // TreeNode represents one node in a tree view.
 type TreeNode struct {
 	// The reference object.
-	reference interface{}
+	reference any
 
 	// This node's child nodes.
 	children []*TreeNode
@@ -101,7 +101,7 @@ func (n *TreeNode) walk(callback func(node, parent *TreeNode) bool) {
 // SetReference allows you to store a reference of any type in this node. This
 // will allow you to establish a mapping between the TreeView hierarchy and your
 // internal tree structure.
-func (n *TreeNode) SetReference(reference interface{}) {
+func (n *TreeNode) SetReference(reference any) {
 	n.Lock()
 	defer n.Unlock()
 
@@ -109,7 +109,7 @@ func (n *TreeNode) SetReference(reference interface{}) {
 }
 
 // GetReference returns this node's reference object.
-func (n *TreeNode) GetReference() interface{} {
+func (n *TreeNode) GetReference() any {
 	n.RLock()
 	defer n.RUnlock()
 

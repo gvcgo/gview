@@ -11,12 +11,12 @@ import (
 
 // ListItem represents an item in a List.
 type ListItem struct {
-	disabled      bool        // Whether or not the list item is selectable.
-	mainText      []byte      // The main text of the list item.
-	secondaryText []byte      // A secondary text to be shown underneath the main text.
-	shortcut      rune        // The key to select the list item directly, 0 if there is no shortcut.
-	selected      func()      // The optional function which is called when the item is selected.
-	reference     interface{} // An optional reference object.
+	disabled      bool   // Whether or not the list item is selectable.
+	mainText      []byte // The main text of the list item.
+	secondaryText []byte // A secondary text to be shown underneath the main text.
+	shortcut      rune   // The key to select the list item directly, 0 if there is no shortcut.
+	selected      func() // The optional function which is called when the item is selected.
+	reference     any    // An optional reference object.
 
 	sync.RWMutex
 }
@@ -105,7 +105,7 @@ func (l *ListItem) SetSelectedFunc(handler func()) {
 }
 
 // SetReference allows you to store a reference of any type in the item
-func (l *ListItem) SetReference(val interface{}) {
+func (l *ListItem) SetReference(val any) {
 	l.Lock()
 	defer l.Unlock()
 
@@ -113,7 +113,7 @@ func (l *ListItem) SetReference(val interface{}) {
 }
 
 // GetReference returns the item's reference object.
-func (l *ListItem) GetReference() interface{} {
+func (l *ListItem) GetReference() any {
 	l.RLock()
 	defer l.RUnlock()
 
@@ -643,14 +643,8 @@ func (l *List) SetIndicators(selectedPrefix, selectedSuffix, unselectedPrefix, u
 	l.selectedSuffix = []byte(selectedSuffix)
 	l.unselectedPrefix = []byte(unselectedPrefix)
 	l.unselectedSuffix = []byte(unselectedSuffix)
-	l.prefixWidth = len(selectedPrefix)
-	if len(unselectedPrefix) > l.prefixWidth {
-		l.prefixWidth = len(unselectedPrefix)
-	}
-	l.suffixWidth = len(selectedSuffix)
-	if len(unselectedSuffix) > l.suffixWidth {
-		l.suffixWidth = len(unselectedSuffix)
-	}
+	l.prefixWidth = max(len(unselectedPrefix), len(selectedPrefix))
+	l.suffixWidth = max(len(unselectedSuffix), len(selectedSuffix))
 }
 
 // FindItems searches the main and secondary texts for the given strings and
@@ -899,10 +893,7 @@ func (l *List) Draw(screen tcell.Screen) {
 
 	screenWidth, _ := screen.Size()
 	scrollBarHeight := height
-	scrollBarX := x + (width - 1) + l.paddingLeft + l.paddingRight
-	if scrollBarX > screenWidth-1 {
-		scrollBarX = screenWidth - 1
-	}
+	scrollBarX := min(x+(width-1)+l.paddingLeft+l.paddingRight, screenWidth-1)
 
 	// Halve scroll bar height when drawing two lines per list item.
 	if l.showSecondaryText {
@@ -981,7 +972,7 @@ func (l *List) Draw(screen tcell.Screen) {
 		if item.disabled {
 			// Shortcuts.
 			if showShortcuts && item.shortcut != 0 {
-				Print(screen, []byte(fmt.Sprintf("(%c)", item.shortcut)), x-5, y, 4, AlignRight, tcell.ColorDarkSlateGray.TrueColor())
+				Print(screen, fmt.Appendf(nil, "(%c)", item.shortcut), x-5, y, 4, AlignRight, tcell.ColorDarkSlateGray.TrueColor())
 			}
 
 			// Main text.
@@ -994,7 +985,7 @@ func (l *List) Draw(screen tcell.Screen) {
 
 		// Shortcuts.
 		if showShortcuts && item.shortcut != 0 {
-			Print(screen, []byte(fmt.Sprintf("(%c)", item.shortcut)), x-5, y, 4, AlignRight, l.shortcutColor)
+			Print(screen, fmt.Appendf(nil, "(%c)", item.shortcut), x-5, y, 4, AlignRight, l.shortcutColor)
 		}
 
 		// Main text.

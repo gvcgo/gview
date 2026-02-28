@@ -1,8 +1,10 @@
 package cview
 
 import (
-	"codeberg.org/tslocum/cbind"
+	"slices"
+
 	"github.com/gdamore/tcell/v3"
+	"github.com/gvcgo/gbind"
 )
 
 // Key defines the keyboard shortcuts of an application.
@@ -68,16 +70,14 @@ var Keys = Key{
 // HitShortcut returns whether the EventKey provided is present in one or more
 // sets of keybindings.
 func HitShortcut(event *tcell.EventKey, keybindings ...[]string) bool {
-	enc, err := cbind.Encode(event.Modifiers(), event.Key(), event.Str())
+	enc, err := gbind.Encode(event.Modifiers(), event.Key(), event.Str())
 	if err != nil {
 		return false
 	}
 
 	for _, binds := range keybindings {
-		for _, key := range binds {
-			if key == enc {
-				return true
-			}
+		if slices.Contains(binds, enc) {
+			return true
 		}
 	}
 
